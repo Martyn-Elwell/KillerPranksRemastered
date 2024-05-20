@@ -4,15 +4,19 @@ using UnityEngine;
 
 public class UIHandler : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+
+    public void PickupText(bool active)
     {
-        
+
     }
 
-    // Update is called once per frame
-    void Update()
+    public void InteractText(bool active)
     {
-        
+
+    }
+
+    public void HideInteractiveText()
+    {
+
     }
 }

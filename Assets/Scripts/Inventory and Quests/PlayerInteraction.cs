@@ -17,7 +17,7 @@ public class PlayerInteraction : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        InteractionUI();
     }
 
     private void InteractionUI()
@@ -31,52 +31,28 @@ public class PlayerInteraction : MonoBehaviour
             // Check if the hit object has a script with the ItemPickup component
             IPickupable pickupable = hitForText.collider.GetComponent<IPickupable>();
             IInteractable interactable = hitForText.collider.GetComponent<IInteractable>();
-            IPrankable prankable = hitForText.collider.GetComponent<IPrankable>();
-            if (!GetComponent<CharacterController>().enabled)
+            if (pickupable != null)
             {
-                interactText.text = "";
-                interactText.gameObject.SetActive(false);
-
-            }
-            else if (pickupable != null)
-            {
-                interactText.text = "Press " + pickupKey.ToString() + " to Pickup " + hitForText.collider.GetComponent<ItemPickup>().item.itemName;
-                interactText.gameObject.SetActive(true);
+                UI.PickupText(true);
 
             }
             else if (interactable != null)
             {
-                interactText.text = "Press " + pickupKey.ToString() + " to Interact";
-                interactText.gameObject.SetActive(true);
-            }
-            else if (prankable != null)
-            {
-                if (hitForText.collider.GetComponent<PrankLocation>().completed)
-                {
-                    interactText.text = "";
-                    interactText.gameObject.SetActive(false);
-                }
-                else if (hitForText.collider.GetComponent<PrankLocation>().CheckPrerequisites(this.gameObject.GetComponent<Inventory>()))
-                {
-                    interactText.text = "Press " + pickupKey.ToString() + " to Prank";
-                    interactText.gameObject.SetActive(true);
-                }
-                else
-                {
-                    interactText.text = "Complete the steps to prank";
-                    interactText.gameObject.SetActive(true);
-                }
+                UI.InteractText(true);
             }
             else
             {
-                // Hide the interaction text if not aiming at an item
-                interactText.gameObject.SetActive(false);
+                UI.HideInteractiveText();
             }
         }
         else
         {
-            // Hide the interaction text if not aiming at anything
-            interactText.gameObject.SetActive(false);
+            UI.HideInteractiveText();
         }
+    }
+
+    public void Interact()
+    {
+        
     }
 }

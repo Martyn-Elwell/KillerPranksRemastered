@@ -3,61 +3,50 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-    public float walkSpeed = 5f;
-    public float lookSpeed = 5f;
-    public float sprintSpeed = 10f;
-    public float crouchSpeed = 2.5f;
-    public float jumpForce = 5f;
-    public Transform groundCheck;
-    public LayerMask groundMask;
-    public float crouchHeight = 1f;
-    public float standingHeight = 2f;
-
+    [Header("References")]
     private CharacterController characterController;
-    private Vector2 moveInput;
-    private bool isJumping;
-    private bool isSprinting;
-    private bool isCrouching;
+
+    [Header("Stats")]
+    [SerializeField] private float lookSpeed = 5f;
+    [SerializeField] private float walkSpeed = 5f;
+    [SerializeField] private float sprintSpeed = 10f;
+    [SerializeField] private float crouchSpeed = 2.5f;
+    [SerializeField] private float jumpForce = 5f;
+    [SerializeField] private LayerMask groundMask;
+    [SerializeField] private float crouchHeight = 1f;
+    [SerializeField] private float standingHeight = 2f;
+
+    
+    [HideInInspector] public Vector2 moveInput;
+    [HideInInspector] public Vector2 lookInput = Vector2.zero;
+    [HideInInspector] public bool isJumping;
+    [HideInInspector] public bool isSprinting;
+    [HideInInspector] public bool isCrouching;
     private float gravity = -9.81f;
     private Vector3 velocity;
     private bool isGrounded;
     [SerializeField] private Transform cameraTransform;
     [SerializeField] private float verticalLookRotation;
 
-    private Vector2 lookInput = Vector2.zero;
 
     void Awake()
     {
         characterController = GetComponent<CharacterController>();
     }
 
-    void OnEnable()
+
+    void Update()
     {
-        var playerInput = new InputSystem();
-        playerInput.Player.Enable();
+        GroundCheck();
 
-        playerInput.Player.Movement.performed += OnMove;
-        playerInput.Player.Movement.canceled += OnMove;
-        //playerInput.Player.Jump.performed += ctx => isJumping = ctx.ReadValueAsButton();
-        playerInput.Player.Sprint.performed += ctx => isSprinting = ctx.ReadValueAsButton();
-        playerInput.Player.Sprint.canceled += ctx => isSprinting = ctx.ReadValueAsButton();
-        //playerInput.Player.Crouch.performed += ctx => ToggleCrouch(ctx.ReadValueAsButton());
+        Move();
 
-        playerInput.Player.OnLook.performed += OnLook;
-        playerInput.Player.OnLook.canceled += OnLook;
+        Jump();
+
+        Look();
     }
 
-    void OnMove(InputAction.CallbackContext context)
-    {
-        moveInput = context.ReadValue<Vector2>();
-    }
-
-    void OnLook(InputAction.CallbackContext context)
-    {
-        lookInput = context.ReadValue<Vector2>();
-    }
-
-    void ToggleCrouch(bool isCrouchButtonPressed)
+    public void ToggleCrouch(bool isCrouchButtonPressed)
     {
         if (isCrouchButtonPressed)
         {
@@ -66,22 +55,17 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void Update()
+    private void Move()
     {
-        // Ground check
-
-        //isGrounded = Physics.CheckSphere(groundCheck.position, 0.1f, groundMask);
-        isGrounded = characterController.isGrounded;
-        if (isGrounded && velocity.y < 0)
-        {
-            velocity.y = -2f;
-        }
-
+        Debug.Log(moveInput);
         // Calculate movement
         Vector3 move = transform.right * moveInput.x + transform.forward * moveInput.y;
         float speed = isCrouching ? crouchSpeed : (isSprinting ? sprintSpeed : walkSpeed);
         characterController.Move(move * speed * Time.deltaTime);
+    }
 
+    private void Jump()
+    {
         // Jump
         if (isJumping && isGrounded)
         {
@@ -92,7 +76,16 @@ public class PlayerController : MonoBehaviour
         // Apply gravity
         velocity.y += gravity * Time.deltaTime;
         characterController.Move(velocity * Time.deltaTime);
-        Look();
+    }
+
+    private void GroundCheck()
+    {
+        //isGrounded = Physics.CheckSphere(groundCheck.position, 0.1f, groundMask);
+        isGrounded = characterController.isGrounded;
+        if (isGrounded && velocity.y < 0)
+        {
+            velocity.y = -2f;
+        }
     }
 
     private void Look()

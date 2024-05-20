@@ -16,7 +16,7 @@ public class Inventory : MonoBehaviour
         items.Add(item);
     }
 
-    public bool searchInventory(ItemData item)
+    public bool SearchInventory(ItemData item)
     {
         foreach (ItemData itemInInv in items)
         {
