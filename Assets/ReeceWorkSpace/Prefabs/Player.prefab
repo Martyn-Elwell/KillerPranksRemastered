@@ -262,6 +262,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   walkSpeed: 5
+  lookSpeed: 0.5
   sprintSpeed: 10
   crouchSpeed: 2.5
   jumpForce: 5
@@ -271,3 +272,5 @@ MonoBehaviour:
     m_Bits: 0
   crouchHeight: 1
   standingHeight: 2
+  cameraTransform: {fileID: 1151764522002921238}
+  verticalLookRotation: 0

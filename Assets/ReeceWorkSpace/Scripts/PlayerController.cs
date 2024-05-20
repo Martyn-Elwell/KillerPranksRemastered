@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     public float walkSpeed = 5f;
+    public float lookSpeed = 5f;
     public float sprintSpeed = 10f;
     public float crouchSpeed = 2.5f;
     public float jumpForce = 5f;
@@ -20,6 +21,10 @@ public class PlayerController : MonoBehaviour
     private float gravity = -9.81f;
     private Vector3 velocity;
     private bool isGrounded;
+    [SerializeField] private Transform cameraTransform;
+    [SerializeField] private float verticalLookRotation;
+
+    private Vector2 lookInput = Vector2.zero;
 
     void Awake()
     {
@@ -37,11 +42,19 @@ public class PlayerController : MonoBehaviour
         playerInput.Player.Sprint.performed += ctx => isSprinting = ctx.ReadValueAsButton();
         playerInput.Player.Sprint.canceled += ctx => isSprinting = ctx.ReadValueAsButton();
         //playerInput.Player.Crouch.performed += ctx => ToggleCrouch(ctx.ReadValueAsButton());
+
+        playerInput.Player.OnLook.performed += OnLook;
+        playerInput.Player.OnLook.canceled += OnLook;
     }
 
     void OnMove(InputAction.CallbackContext context)
     {
         moveInput = context.ReadValue<Vector2>();
+    }
+
+    void OnLook(InputAction.CallbackContext context)
+    {
+        lookInput = context.ReadValue<Vector2>();
     }
 
     void ToggleCrouch(bool isCrouchButtonPressed)
@@ -79,5 +92,17 @@ public class PlayerController : MonoBehaviour
         // Apply gravity
         velocity.y += gravity * Time.deltaTime;
         characterController.Move(velocity * Time.deltaTime);
+        Look();
+    }
+
+    private void Look()
+    {
+        // Horizontal rotation
+        transform.Rotate(Vector3.up * lookInput.x * lookSpeed);
+
+        // Vertical rotation
+        verticalLookRotation -= lookInput.y * lookSpeed;
+        verticalLookRotation = Mathf.Clamp(verticalLookRotation, -90f, 90f);
+        cameraTransform.localRotation = Quaternion.Euler(verticalLookRotation, 0f, 0f);
     }
 }
