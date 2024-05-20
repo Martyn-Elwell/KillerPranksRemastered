@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IPickupable
+public interface IInteractable
 {
-    public void Pickup();
+    public void Interact();
 }
