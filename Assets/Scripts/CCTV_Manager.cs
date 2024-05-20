@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +7,7 @@ public class CCTV_Manager : MonoBehaviour
 {
     public GameObject[] UI;
     public GameObject[] cameras;
+    public GameObject[] lights;
     public int CurrentCam;
     // Start is called before the first frame update
     void Start()
@@ -18,16 +20,21 @@ public class CCTV_Manager : MonoBehaviour
     {
        if (Input.GetKeyDown(KeyCode.E))
         {
-            CurrentCamera(); 
-            CurrentCam++;
-            NextCam();
+            if (CurrentCam < cameras.Length)
+            {
 
+                CurrentCamera();
+                CurrentCam++;
+                NextCam();
+            }
+
+            
+          
         }
 
-       if (CurrentCam > cameras.Length)
-        {
-            CurrentCam = 0; 
-        }
+        
+        if (CurrentCam == cameras.Length) { CurrentCam = 0; CurrentCamera(); NextCam();}
+       
     }
 
     public void CurrentCamera()
@@ -38,6 +45,7 @@ public class CCTV_Manager : MonoBehaviour
         anim.enabled = false; 
         Camera cam =  cameras[CurrentCam].GetComponent<Camera>();
         cam.enabled = false;
+        lights[CurrentCam].SetActive(false);
     }
     public void NextCam()
     {
@@ -46,6 +54,7 @@ public class CCTV_Manager : MonoBehaviour
         anim.enabled = true;
         Camera cam = cameras[CurrentCam].GetComponent<Camera>();
         cam.enabled = true;
+        lights[CurrentCam].SetActive(true);
 
     }
 
