@@ -3,34 +3,81 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-    private InputSystem inputSystem;
+    public float walkSpeed = 5f;
+    public float sprintSpeed = 10f;
+    public float crouchSpeed = 2.5f;
+    public float jumpForce = 5f;
+    public Transform groundCheck;
+    public LayerMask groundMask;
+    public float crouchHeight = 1f;
+    public float standingHeight = 2f;
 
-    // Start is called before the first frame update
-    private void Awake()
+    private CharacterController characterController;
+    private Vector2 moveInput;
+    private bool isJumping;
+    private bool isSprinting;
+    private bool isCrouching;
+    private float gravity = -9.81f;
+    private Vector3 velocity;
+    private bool isGrounded;
+
+    void Awake()
     {
-        inputSystem = new InputSystem();    
+        characterController = GetComponent<CharacterController>();
     }
 
-    private void OnEnable()
+    void OnEnable()
     {
-        inputSystem.Enable();
-        inputSystem.Player.Movement.performed += Movement_performed;
+        var playerInput = new InputSystem();
+        playerInput.Player.Enable();
+
+        playerInput.Player.Movement.performed += OnMove;
+        playerInput.Player.Movement.canceled += OnMove;
+        //playerInput.Player.Jump.performed += ctx => isJumping = ctx.ReadValueAsButton();
+        playerInput.Player.Sprint.performed += ctx => isSprinting = ctx.ReadValueAsButton();
+        playerInput.Player.Sprint.canceled += ctx => isSprinting = ctx.ReadValueAsButton();
+        //playerInput.Player.Crouch.performed += ctx => ToggleCrouch(ctx.ReadValueAsButton());
     }
 
-    private void Movement_performed(InputAction.CallbackContext obj)
+    void OnMove(InputAction.CallbackContext context)
     {
-        obj.ReadValue<Vector2>();
-        Debug.Log(obj.ReadValue<Vector2>());
+        moveInput = context.ReadValue<Vector2>();
     }
 
-    private void OnDisable()
+    void ToggleCrouch(bool isCrouchButtonPressed)
     {
-        inputSystem.Disable();
+        if (isCrouchButtonPressed)
+        {
+            isCrouching = !isCrouching;
+            characterController.height = isCrouching ? crouchHeight : standingHeight;
+        }
     }
 
-    // Update is called once per frame
-    private void Update()
+    void Update()
     {
-        
+        // Ground check
+
+        //isGrounded = Physics.CheckSphere(groundCheck.position, 0.1f, groundMask);
+        isGrounded = characterController.isGrounded;
+        if (isGrounded && velocity.y < 0)
+        {
+            velocity.y = -2f;
+        }
+
+        // Calculate movement
+        Vector3 move = transform.right * moveInput.x + transform.forward * moveInput.y;
+        float speed = isCrouching ? crouchSpeed : (isSprinting ? sprintSpeed : walkSpeed);
+        characterController.Move(move * speed * Time.deltaTime);
+
+        // Jump
+        if (isJumping && isGrounded)
+        {
+            velocity.y = Mathf.Sqrt(jumpForce * -2f * gravity);
+            isJumping = false;
+        }
+
+        // Apply gravity
+        velocity.y += gravity * Time.deltaTime;
+        characterController.Move(velocity * Time.deltaTime);
     }
 }
