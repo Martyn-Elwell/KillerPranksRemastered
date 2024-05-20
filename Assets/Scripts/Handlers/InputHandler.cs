@@ -48,7 +48,7 @@ public class InputHandler : MonoBehaviour
 
     void OnEnable()
     {
-        var playerInput = new InputSystem();
+/*        var playerInput = new InputSystem();
         playerInput.Player.Enable();
 
         // Movement
@@ -70,7 +70,7 @@ public class InputHandler : MonoBehaviour
         playerInput.Player.Crouch.performed += ctx => playerController.ToggleCrouch(ctx.ReadValueAsButton());
 
         // Interaction
-        playerInput.Player.Interact.performed += OnInteract;
+        playerInput.Player.Interact.performed += OnInteract;*/
     }
 
     private void OnDisable()
