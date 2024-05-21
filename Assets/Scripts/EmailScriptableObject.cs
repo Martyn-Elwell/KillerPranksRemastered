@@ -8,4 +8,5 @@ public class EmailScriptableObject : ScriptableObject
     public string target = null;
     public string floor = null;
     public string prank = null;
+    public string sender = null;
 }
