@@ -10,6 +10,9 @@ public class EmailManager : MonoBehaviour
     [SerializeField] private Text floorNameText;
     [SerializeField] private Text prankNameText;
 
+    [SerializeField] private GameObject emailPopupCanvas;
+    [SerializeField] private GameObject emailDisplay;
+
     [SerializeField] private int num;
 
     // Start is called before the first frame update
@@ -38,10 +41,12 @@ public class EmailManager : MonoBehaviour
                 floorNameText.text = emailScriptableObject[1].floor;
                 prankNameText.text = emailScriptableObject[1].prank;
                 break;
+            case 2:
+                num--;
+                break;
             default:
                 Debug.Log("Unknown Data");
                 break;
-
         }
     }
 
@@ -55,5 +60,11 @@ public class EmailManager : MonoBehaviour
     {
         Debug.Log("Back arrow pressed");
         num--;
+    }
+
+    public void ExitButton()
+    {
+        emailPopupCanvas.SetActive(false);
+        emailDisplay.SetActive(true);
     }
 }
