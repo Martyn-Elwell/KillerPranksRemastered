@@ -6,77 +6,66 @@ using UnityEngine.InputSystem;
 public class InputHandler : MonoBehaviour
 {
     private PlayerController playerController;
-    private PlayerInteraction playerInteraction;
+    private PlayerControls playerControls;
 
-    private void Start()
+    void Start()
+    {
+        LockCursor(true);
+    }
+
+    void Awake()
     {
         playerController = GetComponent<PlayerController>();
-        playerInteraction = GetComponent<PlayerInteraction>();
-        
-    }
-
-    public void OnMove(InputAction.CallbackContext context)
-    {
-        Debug.LogWarning("TRYING TO MOVE");
-        playerController.moveInput = context.ReadValue<Vector2>();
-    }
-
-    public void OnLook(InputAction.CallbackContext context)
-    {
-        playerController.lookInput = context.ReadValue<Vector2>();
-    }
-
-    /*public void OnJump(InputAction.CallbackContext context)
-    {
-        playerController.isJumping = context.ReadValueAsButton();
-    }
-
-    public void OnSprint(InputAction.CallbackContext context)
-    {
-        playerController.isSprinting = context.ReadValueAsButton();
-    }
-
-    public void OnCrouch(InputAction.CallbackContext context)
-    {
-        playerController.ToggleCrouch(context.ReadValueAsButton());
-    }*/
-
-    public void OnInteract(InputAction.CallbackContext context)
-    {
-        
+        playerControls = new PlayerControls();
     }
 
     void OnEnable()
     {
-/*        var playerInput = new InputSystem();
-        playerInput.Player.Enable();
+        playerControls.Player.Enable();
 
-        // Movement
-        playerInput.Player.Movement.performed += OnMove;
-        playerInput.Player.Movement.canceled += OnMove;
-
-        // Looking
-        playerInput.Player.OnLook.performed += OnLook;
-        playerInput.Player.OnLook.canceled += OnLook;
-
-        // Jumping
-        playerInput.Player.Jump.performed += ctx => playerController.isJumping = ctx.ReadValueAsButton();
-
-        // Sprinting
-        playerInput.Player.Sprint.performed += ctx => playerController.isSprinting = ctx.ReadValueAsButton();
-        playerInput.Player.Sprint.canceled += ctx => playerController.isSprinting = ctx.ReadValueAsButton();
-
-        // Courching
-        playerInput.Player.Crouch.performed += ctx => playerController.ToggleCrouch(ctx.ReadValueAsButton());
-
-        // Interaction
-        playerInput.Player.Interact.performed += OnInteract;*/
+        playerControls.Player.Move.performed += OnMove;
+        playerControls.Player.Move.canceled += OnMove;
+        playerControls.Player.Look.performed += OnLook;
+        playerControls.Player.Look.canceled += OnLook;
+        playerControls.Player.Jump.performed += ctx => playerController.isJumping = ctx.ReadValueAsButton();
+        playerControls.Player.Sprint.performed += ctx => playerController.isSprinting = ctx.ReadValueAsButton();
+        playerControls.Player.Sprint.canceled += ctx => playerController.isSprinting = ctx.ReadValueAsButton();
+        playerControls.Player.Crouch.performed += ctx => ToggleCrouch(ctx.ReadValueAsButton());
     }
 
-    private void OnDisable()
+    void OnDisable()
     {
-        
+        playerControls.Player.Disable();
     }
 
+    void OnMove(InputAction.CallbackContext context)
+    {
+        playerController.moveInput = context.ReadValue<Vector2>();
+    }
+    void OnLook(InputAction.CallbackContext context)
+    {
+        playerController.lookInput = context.ReadValue<Vector2>();
+    }
 
+    void ToggleCrouch(bool isCrouchButtonPressed)
+    {
+        if (isCrouchButtonPressed)
+        {
+            playerController.Crouch();
+        }
+    }
+
+    private void LockCursor(bool lockState)
+    {
+        if (lockState)
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+    }
 }
