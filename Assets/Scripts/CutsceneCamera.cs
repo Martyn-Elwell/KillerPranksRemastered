@@ -5,22 +5,22 @@ using UnityEngine.Playables;
 
 public class CutsceneCamera : MonoBehaviour
 {
-    [SerializeField] public GameObject play_cam;
-    [SerializeField] public PlayableDirector timeline;
-    [SerializeField] public GameObject CutsceneTimeline;
+    [SerializeField] public GameObject cam1;
+    //[SerializeField] public PlayableDirector timeline;
+    [SerializeField] public GameObject cam2;
 
     void Start()
     {
-        //play_cam.SetActive(false);
-        CutsceneTimeline.SetActive(false);
+        //cam1.SetActive(true);
+        //cam2.SetActive(false);
     }
 
     public void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            play_cam.SetActive(false);
-            CutsceneTimeline.SetActive(true);
+            cam1.SetActive(false);
+            cam2.SetActive(true);
         }
     }
 }
