@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 public class InputHandler : MonoBehaviour
 {
     private PlayerController playerController;
+    private PlayerInteraction playerInteraction;
     private PlayerControls playerControls;
 
     void Start()
@@ -16,6 +17,7 @@ public class InputHandler : MonoBehaviour
     void Awake()
     {
         playerController = GetComponent<PlayerController>();
+        playerInteraction = GetComponent<PlayerInteraction>();
         playerControls = new PlayerControls();
     }
 
@@ -31,6 +33,7 @@ public class InputHandler : MonoBehaviour
         playerControls.Player.Sprint.performed += ctx => playerController.isSprinting = ctx.ReadValueAsButton();
         playerControls.Player.Sprint.canceled += ctx => playerController.isSprinting = ctx.ReadValueAsButton();
         playerControls.Player.Crouch.performed += ctx => ToggleCrouch(ctx.ReadValueAsButton());
+        playerControls.Player.Interact.performed += ctx => playerInteraction.Interact();
     }
 
     void OnDisable()
