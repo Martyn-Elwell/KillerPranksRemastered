@@ -11,28 +11,25 @@ public class EmailManager : MonoBehaviour
     [SerializeField] private Text floorNameText = null;
     [SerializeField] private Text prankNameText = null;
     [SerializeField] private List<Text> senderNameText = null;
+    [SerializeField] private List<Text> dateNameText = null;
 
     [SerializeField] private GameObject emailPopupCanvas = null;
     [SerializeField] private GameObject desktopDisplay = null;
     [SerializeField] private GameObject emailDisplay = null;
+    [SerializeField] private GameObject emailButton = null;
 
     [SerializeField] private int num = 0;
-
-    private void Awake()
-    {
-    }
 
     // Start is called before the first frame update
     private void Start()
     {
-        //targetNameText.text = emailScriptableObject[0].target;
-        //floorNameText.text = emailScriptableObject[0].floor;
-        //prankNameText.text = emailScriptableObject[0].prank;
         senderNameText[0].text = emailScriptableObject[0].sender;
         senderNameText[1].text = emailScriptableObject[1].sender;
+        dateNameText[0].text = emailScriptableObject[0].date;
+        dateNameText[1].text = emailScriptableObject[1].date;
         foreach (Button email in emailNotifications)
         {
-            email.onClick.AddListener(() => Test(email));
+            email.onClick.AddListener(() => InboxSelection(email));
             Debug.Log(email);
         }
     }
@@ -64,7 +61,7 @@ public class EmailManager : MonoBehaviour
         }
     }
 
-    private void Test(Button clickButton)
+    private void InboxSelection(Button clickButton)
     {
         if (clickButton == emailNotifications[0])
         {
@@ -77,34 +74,20 @@ public class EmailManager : MonoBehaviour
         
     }
 
-    private void buttonDetection()
-    {
-        if (emailNotifications[0].name == "EmailButton")
-        {
-            num = 1;
-        }
-        else
-        {
-            Debug.Log("Nothing clicked");
-        }
-    }
-
     public void ForwardArrow()
     {
-        Debug.Log("Forward arrow pressed");
         num++;
     }
 
     public void BackwardArrow()
     {
-        Debug.Log("Back arrow pressed");
         num--;
     }
 
     public void GoToEmailDisplay()
     {
         emailDisplay.SetActive(true);
-        //desktopDisplay.SetActive(false);
+        emailButton.gameObject.GetComponent<Button>().enabled = false;
     }
 
     public void GoToEmailPopup()
@@ -118,8 +101,16 @@ public class EmailManager : MonoBehaviour
         emailPopupCanvas.SetActive(false);
         emailDisplay.SetActive(false);
         desktopDisplay.SetActive(true);
+        emailButton.gameObject.GetComponent<Button>().enabled = true;
+
     }
     public void ExitButtonToEmailDisplay()
+    {
+        emailPopupCanvas.SetActive(false);
+        emailDisplay.SetActive(true);
+    }
+
+    public void BackToInbox()
     {
         emailPopupCanvas.SetActive(false);
         emailDisplay.SetActive(true);
