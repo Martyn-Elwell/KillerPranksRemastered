@@ -104,7 +104,7 @@ public class EmailManager : MonoBehaviour
     public void GoToEmailDisplay()
     {
         emailDisplay.SetActive(true);
-        desktopDisplay.SetActive(false);
+        //desktopDisplay.SetActive(false);
     }
 
     public void GoToEmailPopup()
@@ -115,6 +115,7 @@ public class EmailManager : MonoBehaviour
 
     public void ExitButtonToDesktop()
     {
+        emailPopupCanvas.SetActive(false);
         emailDisplay.SetActive(false);
         desktopDisplay.SetActive(true);
     }
