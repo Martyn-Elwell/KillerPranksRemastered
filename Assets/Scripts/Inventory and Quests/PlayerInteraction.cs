@@ -4,14 +4,15 @@ using UnityEngine;
 
 public class PlayerInteraction : MonoBehaviour
 {
-    public Inventory playerInventory;
-    public UIHandler UI;
+    private Inventory playerInventory;
+    private UIHandler UI;
 
     [SerializeField] private float raycastDistance = 3f;
 
     void Start()
     {
-        
+        playerInventory = GetComponent<Inventory>();
+        UI = GetComponentInChildren<UIHandler>();
     }
 
     // Update is called once per frame
@@ -33,7 +34,7 @@ public class PlayerInteraction : MonoBehaviour
             IInteractable interactable = hitForText.collider.GetComponent<IInteractable>();
             if (pickupable != null)
             {
-                UI.PickupText(true);
+                UI.PickupText(true, null);
 
             }
             else if (interactable != null)

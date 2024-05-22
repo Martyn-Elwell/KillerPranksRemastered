@@ -9,8 +9,8 @@ public class PlayerController : MonoBehaviour
     [Header("Stats")]
     [SerializeField] private float lookSpeed = 100f;
     [SerializeField] private float walkSpeed = 5f;
-    [SerializeField] private float sprintSpeed = 10f;
-    [SerializeField] private float crouchSpeed = 2.5f;
+    [SerializeField] private float sprintSpeed = 7f;
+    [SerializeField] private float crouchSpeed = 3f;
     [SerializeField] private float jumpForce = 1f;
     [SerializeField] private float crouchHeight = 1f;
     [SerializeField] private float standingHeight = 1.8f;
@@ -67,6 +67,13 @@ public class PlayerController : MonoBehaviour
 
     private void Jump()
     {
+        // Un Crouch if crounched
+        if(isCrouching && isJumping)
+        {
+            isJumping = false;
+            Crouch();
+        }
+
         // Jump
         if (isJumping && isGrounded)
         {
@@ -84,6 +91,8 @@ public class PlayerController : MonoBehaviour
         {
             velocity.y = 0f;
         }
+
+
     }
 
     private void Look()
@@ -105,6 +114,8 @@ public class PlayerController : MonoBehaviour
     public void Crouch()
     {
         isCrouching = !isCrouching;
-        characterController.height = isCrouching ? crouchHeight : standingHeight;
+        float currentHeight = isCrouching ? crouchHeight : standingHeight;
+        characterController.height = currentHeight;
+        cameraTransform.localPosition = new Vector3(cameraTransform.localPosition.x, currentHeight, cameraTransform.localPosition.z);
     }
 }
