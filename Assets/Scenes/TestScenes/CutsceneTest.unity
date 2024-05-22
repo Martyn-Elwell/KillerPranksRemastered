@@ -189,9 +189,9 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.1
-  far clip plane: 5000
-  field of view: 60.000004
+  near clip plane: 0.3
+  far clip plane: 1000
+  field of view: 60
   orthographic: 0
   orthographic size: 10
   m_Depth: -1
@@ -217,8 +217,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 188223422}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.03739306, y: 0.9473547, z: -0.120352104, w: -0.2943404}
-  m_LocalPosition: {x: -9.693628, y: 2.4113488, z: 24.997314}
+  m_LocalRotation: {x: 0, y: 0.9995599, z: -0, w: -0.029667027}
+  m_LocalPosition: {x: -14.985, y: 1.6000001, z: 17.304}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -701,7 +701,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8639193784745769916, guid: 3a3b3fca033ad384c80a3519d481a441,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1843697350}
   m_SourcePrefab: {fileID: 100100000, guid: 3a3b3fca033ad384c80a3519d481a441, type: 3}
 --- !u!1 &1168914342
 GameObject:
@@ -719,7 +723,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1168914343
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -954,6 +958,26 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 0
+--- !u!1 &1843697343 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8639193784745769916, guid: 3a3b3fca033ad384c80a3519d481a441,
+    type: 3}
+  m_PrefabInstance: {fileID: 951954002}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1843697350
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1843697343}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbccf77a0759a764081ee8ea186f8130, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cam1: {fileID: 287989032}
+  cam2: {fileID: 1168914342}
 --- !u!1 &1889661067
 GameObject:
   m_ObjectHideFlags: 0
@@ -983,9 +1007,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbccf77a0759a764081ee8ea186f8130, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  play_cam: {fileID: 287989032}
-  timeline: {fileID: 502695394}
-  CutsceneTimeline: {fileID: 502695392}
+  cam1: {fileID: 0}
+  cam2: {fileID: 0}
 --- !u!4 &1889661069
 Transform:
   m_ObjectHideFlags: 0
