@@ -34,7 +34,7 @@ public class PlayerInteraction : MonoBehaviour
             IInteractable interactable = hitForText.collider.GetComponent<IInteractable>();
             if (pickupable != null)
             {
-                UI.PickupText(true, null);
+                UI.PickupText(true, hitForText.collider.GetComponent<Item>().itemData.Icon);
 
             }
             else if (interactable != null)
@@ -54,6 +54,36 @@ public class PlayerInteraction : MonoBehaviour
 
     public void Interact()
     {
-        
+        Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit, raycastDistance))
+        {
+            // Pickup able object
+            IPickupable pickupable = hit.collider.GetComponent<IPickupable>();
+            if (pickupable != null)
+            {
+                pickupable.Pickup();
+
+                ItemData item = hit.collider.GetComponent<Item>().itemData;
+                if (item != null)
+                {
+                    PickUpItem(item);
+                }
+            }
+
+            // InteractableObject
+            IInteractable interactable = hit.collider.GetComponent<IInteractable>();
+            if (interactable != null)
+            {
+                interactable.Interact();
+            }
+
+        }
+    }
+
+    public void PickUpItem(ItemData item)
+    {
+        playerInventory.AddItem(item);
     }
 }
