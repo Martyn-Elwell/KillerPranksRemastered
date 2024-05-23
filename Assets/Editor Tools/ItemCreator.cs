@@ -17,7 +17,6 @@ public class ItemCreator : EditorWindow
     private string filePath = "Assets/Items";
 
     // Item Inputs
-    private IntegerField IDField;
     private TextField nameField;
     private TextField descriptionField;
     private ObjectField prefabField;
@@ -48,7 +47,6 @@ public class ItemCreator : EditorWindow
 
     private void SetupUI()
     {
-        IDField = root.Q<IntegerField>("IDField");
         nameField = root.Q<TextField>("NameField");
         descriptionField = root.Q<TextField>("DescriptionField");
         prefabField = root.Q<ObjectField>("PrefabField");
@@ -81,7 +79,7 @@ public class ItemCreator : EditorWindow
     {
         // Instantiate the prefab
         GameObject newItem = PrefabUtility.InstantiatePrefab(prefabField.value) as GameObject;
-
+        PrefabUtility.UnpackPrefabInstance(newItem, PrefabUnpackMode.Completely, InteractionMode.AutomatedAction);
         // Create ScriptableObject
         string dataPath = CreateScriptableObject();
         ItemData newData = AssetDatabase.LoadAssetAtPath<ItemData>(dataPath);
@@ -104,6 +102,8 @@ public class ItemCreator : EditorWindow
 
         DestroyImmediate(newItem);
 
+
+        ClearFields();
     }
 
     private string CreateScriptableObject()
@@ -112,8 +112,9 @@ public class ItemCreator : EditorWindow
         ItemData newData = ScriptableObject.CreateInstance<ItemData>();
 
         // Set values
-        newData.ID = IDField.value;
         newData.name = nameField.value;
+        newData.ID = CalculateItemID();
+        newData.itemName = nameField.value;
         newData.itemDescription = descriptionField.value;
         iconSprite = iconField.value as Sprite;
         if (iconSprite != null) { newData.Icon = iconSprite; }
@@ -133,6 +134,37 @@ public class ItemCreator : EditorWindow
         UnityEditor.AssetDatabase.SaveAssets();
 
         return assetPath;
+    }
+
+    private int CalculateItemID()
+    {
+        int count = 0;
+
+        // Get all asset files in the folder
+        string[] files = Directory.GetFiles(filePath, "*.asset", SearchOption.AllDirectories);
+
+        foreach (string file in files)
+        {
+            // Load the asset
+            ItemData itemData = AssetDatabase.LoadAssetAtPath<ItemData>(file);
+
+            // Check if it is of type ItemData
+            if (itemData != null)
+            {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    private void ClearFields()
+    {
+        nameField.SetValueWithoutNotify(null);
+        descriptionField.SetValueWithoutNotify(null);
+        prefabField.SetValueWithoutNotify(null);
+        iconField.SetValueWithoutNotify(null);
+        colourField.SetValueWithoutNotify(Color.white);
+        contrabandField.SetValueWithoutNotify(false);
     }
 
 }

@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ee48d83ac9e477e458a4dff4262dd73a, type: 3}
-  m_Name: bottle
+  m_Name: whoopee
   m_EditorClassIdentifier: 
   ID: 1
-  itemName: 
-  itemDescription: Bottle
-  prefab: {fileID: 271247085847569226, guid: dc003ed2130a3a94197ff12c64343c2e, type: 3}
-  Icon: {fileID: 21300000, guid: b7f08fb44a9f35c47bcb8c9e24fb9bc2, type: 3}
-  IconColour: {r: 0.3374569, g: 0.8058926, b: 0.8584906, a: 1}
+  itemName: whoopee
+  itemDescription: Whoopee
+  prefab: {fileID: 8130860196977701412, guid: 65e7c7eaa4061a54ea8e75da15ffdb34, type: 3}
+  Icon: {fileID: 21300000, guid: 4239f0d262ce7c14dbd55838a94ec43f, type: 3}
+  IconColour: {r: 0.7924528, g: 0.4385902, b: 0.72625375, a: 1}
   contraband: 0
