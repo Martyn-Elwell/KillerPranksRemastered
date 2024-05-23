@@ -8,5 +8,5 @@
     <uie:ObjectField label="Icon" type="UnityEngine.Sprite, UnityEngine.CoreModule" name="IconField" />
     <uie:ColorField label="Icon Colour" value="#FFFFFFFF" name="ColourField" />
     <ui:Toggle label="Contaband" name="ContrabandField" />
-    <ui:Button text="Create Item" parse-escape-sequences="true" display-tooltip-when-elided="true" />
+    <ui:Button text="Create Item" parse-escape-sequences="true" display-tooltip-when-elided="true" name="CreateField" />
 </ui:UXML>
