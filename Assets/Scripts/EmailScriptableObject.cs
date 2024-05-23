@@ -10,4 +10,6 @@ public class EmailScriptableObject : ScriptableObject
     public string prank = null;
     public string sender = null;
     public string date = null;
+    public string emailHolder = null;
+    public string emailDescription = null;
 }
