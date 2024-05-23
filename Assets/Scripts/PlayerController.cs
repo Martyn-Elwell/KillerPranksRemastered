@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviour
         Camera _camera = GetComponentInChildren<Camera>();
         cameraTransform = _camera.gameObject.transform;
         SpawnPlayer();
-        //Cutscene.SetActive(true);
+        Cutscene.SetActive(true);
         //Cutscene.startTimeline();
     }
 
