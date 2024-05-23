@@ -4,51 +4,68 @@ using UnityEngine.UI;
 
 public class EmailManager : MonoBehaviour
 {
+    [Header("Email Scriptable Object Data")]
     [SerializeField] private List<EmailScriptableObject> emailScriptableObject = null;
-    [SerializeField] private List<Button> emailNotifications = null;
 
+    [Header("Inbox Button Settings")]
+    [SerializeField] private List<Button> emailNotificationsList = null;
+    [SerializeField] private List<Text> senderNameTextList = null;
+    [SerializeField] private List<Text> dateNameTextList = null;
+
+    [Header("Email Popup Settings")]
     [SerializeField] private Text targetNameText = null;
     [SerializeField] private Text floorNameText = null;
     [SerializeField] private Text prankNameText = null;
-    [SerializeField] private List<Text> senderNameText = null;
-    [SerializeField] private List<Text> dateNameText = null;
 
-    [SerializeField] private GameObject emailPopupCanvas = null;
+    [Header("Popup Canvases")]
     [SerializeField] private GameObject desktopDisplay = null;
+    [SerializeField] private GameObject inboxDisplay = null;
     [SerializeField] private GameObject emailDisplay = null;
     [SerializeField] private GameObject cctvDisplay = null;
 
+    [Header("Desktop Icons")]
     [SerializeField] private GameObject emailButton = null;
     [SerializeField] private GameObject cctvButton = null;
 
-    [SerializeField] private int num = 0;
+    [Header("Camera Lists")]
+    [SerializeField] private List<GameObject> footageList = null;
 
-    [SerializeField] private List<GameObject> cameraList = null;
+    private int currentDisplay = 0;
 
     // Start is called before the first frame update
     private void Start()
     {
-        senderNameText[0].text = emailScriptableObject[0].sender;
-        senderNameText[1].text = emailScriptableObject[1].sender;
-        dateNameText[0].text = emailScriptableObject[0].date;
-        dateNameText[1].text = emailScriptableObject[1].date;
-        foreach (Button email in emailNotifications)
+        /// TEMP TEST WILL BE REMOVED ///
+        senderNameTextList[0].text = emailScriptableObject[0].sender;
+        senderNameTextList[1].text = emailScriptableObject[1].sender;
+        dateNameTextList[0].text = emailScriptableObject[0].date;
+        dateNameTextList[1].text = emailScriptableObject[1].date;
+        ///
+
+        // Used to click on each inbox message individually
+        foreach (Button email in emailNotificationsList)
         {
             email.onClick.AddListener(() => InboxSelection(email));
-            Debug.Log(email);
         }
     }
 
     // Update is called once per frame
     private void Update()
     {
+        // Using the forward and back buttons displays different options in the emails
+        SwitchBetweenPrankEmails();
+        // Using the forward and back buttons displays different CCTV footage 
+        SwitchBetweenCCTV();        
+    }
+
+    private void SwitchBetweenPrankEmails()
+    {
         if (emailDisplay.activeInHierarchy == true)
         {
-            Debug.Log("Email Display Enabled");
-            switch (num)
+            switch (currentDisplay)
             {
                 case -1:
-                    num++;
+                    currentDisplay++;
                     break;
                 case 0:
                     targetNameText.text = emailScriptableObject[0].target;
@@ -61,33 +78,7 @@ public class EmailManager : MonoBehaviour
                     prankNameText.text = emailScriptableObject[1].prank;
                     break;
                 case 2:
-                    num--;
-                    break;
-                default:
-                    Debug.Log("Unknown Data");
-                    break;
-            }
-        }
-
-        if (cctvDisplay.activeInHierarchy == true)
-        {
-            Debug.Log("CCTV Enabled");
-
-            switch (num)
-            {
-                case -1:
-                    num++;
-                    break;
-                case 0:
-                    cameraList[0].SetActive(true);
-                    cameraList[1].SetActive(false);
-                    break;
-                case 1:
-                    cameraList[0].SetActive(false);
-                    cameraList[1].SetActive(true);
-                    break;
-                case 2:
-                    num--;
+                    currentDisplay--;
                     break;
                 default:
                     Debug.Log("Unknown Data");
@@ -96,32 +87,60 @@ public class EmailManager : MonoBehaviour
         }
     }
 
+    private void SwitchBetweenCCTV()
+    {
+        if (cctvDisplay.activeInHierarchy == true)
+        {
+            switch (currentDisplay)
+            {
+                case -1:
+                    currentDisplay++;
+                    break;
+                case 0:
+                    footageList[0].SetActive(true);
+                    footageList[1].SetActive(false);
+                    break;
+                case 1:
+                    footageList[0].SetActive(false);
+                    footageList[1].SetActive(true);
+                    break;
+                case 2:
+                    currentDisplay--;
+                    break;
+                default:
+                    Debug.Log("Unknown Data");
+                    break;
+            }
+        }
+    }
+
+    // Decided what inbox message matches with which email popup
     private void InboxSelection(Button clickButton)
     {
-        if (clickButton == emailNotifications[0])
+        if (clickButton == emailNotificationsList[0])
         {
-            num = 0;
+            currentDisplay = 0;
         }
-        else if (clickButton == emailNotifications[1])
+        else if (clickButton == emailNotificationsList[1])
         {
-            num = 1;
+            currentDisplay = 1;
         }
         
     }
 
     public void ForwardArrow()
     {
-        num++;
+        currentDisplay++;
     }
 
     public void BackwardArrow()
     {
-        num--;
+        currentDisplay--;
     }
 
-    public void GoToEmailDisplay()
+    public void GoToInboxDisplay()
     {
-        emailDisplay.SetActive(true);
+        inboxDisplay.SetActive(true);
         emailButton.gameObject.GetComponent<Button>().enabled = false;
         cctvButton.gameObject.GetComponent<Button>().enabled = false;
     }
@@ -135,29 +154,31 @@ public class EmailManager : MonoBehaviour
 
     public void GoToEmailPopup()
     {
-        emailPopupCanvas.SetActive(true);
-        emailDisplay.SetActive(false);
+        inboxDisplay.SetActive(false);
+        emailDisplay.SetActive(true);
     }
 
     public void ExitButtonToDesktop()
     {
-        emailPopupCanvas.SetActive(false);
+        inboxDisplay.SetActive(false);
         emailDisplay.SetActive(false);
         cctvDisplay.SetActive(false);
         desktopDisplay.SetActive(true);
         emailButton.gameObject.GetComponent<Button>().enabled = true;
         cctvButton.gameObject.GetComponent<Button>().enabled = true;
+        currentDisplay = 0;
 
     }
     public void ExitButtonToEmailDisplay()
     {
-        emailPopupCanvas.SetActive(false);
+        inboxDisplay.SetActive(false);
         emailDisplay.SetActive(true);
+        currentDisplay = 0;
     }
 
     public void BackToInbox()
     {
-        emailPopupCanvas.SetActive(false);
-        emailDisplay.SetActive(true);
+        inboxDisplay.SetActive(true);
+        emailDisplay.SetActive(false);
     }
 }
