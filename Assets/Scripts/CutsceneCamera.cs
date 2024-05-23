@@ -5,22 +5,41 @@ using UnityEngine.Playables;
 
 public class CutsceneCamera : MonoBehaviour
 {
-    [SerializeField] public GameObject play_cam;
-    [SerializeField] public PlayableDirector timeline;
-    [SerializeField] public GameObject CutsceneTimeline;
+    [SerializeField] private PlayableDirector director;
+    [SerializeField] public GameObject controlPanel;
+    [SerializeField] public GameObject cam1;
+    //[SerializeField] public PlayableDirector timeline;
+    //[SerializeField] public GameObject cam2;
 
-    void Start()
+    void Awake()
     {
-        //play_cam.SetActive(false);
-        CutsceneTimeline.SetActive(false);
+        cam1.SetActive(false);
+        director.played += Director_Played;
+        director.stopped += Director_Stopped;
     }
 
     public void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        /*if (Input.GetKeyDown(KeyCode.Space))
         {
-            play_cam.SetActive(false);
-            CutsceneTimeline.SetActive(true);
-        }
+            cam1.SetActive(false);
+            cam2.SetActive(true);
+        }*/
+    }
+
+    private void Director_Played(PlayableDirector obj)
+    {
+        controlPanel.SetActive(false);
+    }
+
+    private void Director_Stopped(PlayableDirector obj)
+    {
+        controlPanel.SetActive(true);
+    }
+
+    public void startTimeline()
+    {
+        director.Play();
+        cam1.SetActive(true);
     }
 }
