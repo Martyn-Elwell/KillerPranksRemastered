@@ -4036,7 +4036,7 @@ MonoBehaviour:
   walkSpeed: 5
   sprintSpeed: 7
   crouchSpeed: 3
-  jumpForce: 2
+  jumpForce: 0.5
   crouchHeight: 1.1
   standingHeight: 1.6
   moveInput: {x: 0, y: 0}
@@ -4082,6 +4082,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1bdbd1eed8fa7be40a15af4c8c0a4126, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player_cam: {fileID: 0}
 --- !u!114 &1536216111066548928
 MonoBehaviour:
   m_ObjectHideFlags: 0
