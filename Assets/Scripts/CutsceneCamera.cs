@@ -7,13 +7,13 @@ public class CutsceneCamera : MonoBehaviour
 {
     [SerializeField] private PlayableDirector director;
     [SerializeField] public GameObject controlPanel;
-    [SerializeField] public GameObject cam1;
+    //[SerializeField] public GameObject cam1;
     //[SerializeField] public PlayableDirector timeline;
     //[SerializeField] public GameObject cam2;
 
-    void Awake()
+    private void Awake()
     {
-        cam1.SetActive(false);
+        //cam1.SetActive(false);
         director.played += Director_Played;
         director.stopped += Director_Stopped;
     }
@@ -40,6 +40,6 @@ public class CutsceneCamera : MonoBehaviour
     public void startTimeline()
     {
         director.Play();
-        cam1.SetActive(true);
+        //cam1.SetActive(true);
     }
 }
