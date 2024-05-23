@@ -8,7 +8,7 @@ public class InputHandler : MonoBehaviour
     private PlayerController playerController;
     private PlayerInteraction playerInteraction;
     private PlayerControls playerControls;
-    [SerializeField] private GameObject player_cam;
+    //[SerializeField] private GameObject player_cam;
 
     void Start()
     {
@@ -75,15 +75,15 @@ public class InputHandler : MonoBehaviour
 
     public void EnableInput()
     {
-        LockCursor(false);
-        player_cam.SetActive(true);
+        LockCursor(true);
+        //player_cam.SetActive(true);
         playerControls.Player.Enable();
     }
 
     public void DisableInput()
     {
         LockCursor(true);
-        player_cam.SetActive(false);
+        //player_cam.SetActive(false);
         playerControls.Player.Disable();
     }
 }
