@@ -16,9 +16,14 @@ public class EmailManager : MonoBehaviour
     [SerializeField] private GameObject emailPopupCanvas = null;
     [SerializeField] private GameObject desktopDisplay = null;
     [SerializeField] private GameObject emailDisplay = null;
+    [SerializeField] private GameObject cctvDisplay = null;
+
     [SerializeField] private GameObject emailButton = null;
+    [SerializeField] private GameObject cctvButton = null;
 
     [SerializeField] private int num = 0;
+
+    [SerializeField] private List<GameObject> cameraList = null;
 
     // Start is called before the first frame update
     private void Start()
@@ -37,27 +42,57 @@ public class EmailManager : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        switch (num)
+        if (emailDisplay.activeInHierarchy == true)
         {
-            case -1:
-                num++;
-                break;
-            case 0:
-                targetNameText.text = emailScriptableObject[0].target;
-                floorNameText.text = emailScriptableObject[0].floor;
-                prankNameText.text = emailScriptableObject[0].prank;
-                break;
-            case 1:
-                targetNameText.text = emailScriptableObject[1].target;
-                floorNameText.text = emailScriptableObject[1].floor;
-                prankNameText.text = emailScriptableObject[1].prank;
-                break;
-            case 2:
-                num--;
-                break;
-            default:
-                Debug.Log("Unknown Data");
-                break;
+            Debug.Log("Email Display Enabled");
+            switch (num)
+            {
+                case -1:
+                    num++;
+                    break;
+                case 0:
+                    targetNameText.text = emailScriptableObject[0].target;
+                    floorNameText.text = emailScriptableObject[0].floor;
+                    prankNameText.text = emailScriptableObject[0].prank;
+                    break;
+                case 1:
+                    targetNameText.text = emailScriptableObject[1].target;
+                    floorNameText.text = emailScriptableObject[1].floor;
+                    prankNameText.text = emailScriptableObject[1].prank;
+                    break;
+                case 2:
+                    num--;
+                    break;
+                default:
+                    Debug.Log("Unknown Data");
+                    break;
+            }
+        }
+
+        if (cctvDisplay.activeInHierarchy == true)
+        {
+            Debug.Log("CCTV Enabled");
+
+            switch (num)
+            {
+                case -1:
+                    num++;
+                    break;
+                case 0:
+                    cameraList[0].SetActive(true);
+                    cameraList[1].SetActive(false);
+                    break;
+                case 1:
+                    cameraList[0].SetActive(false);
+                    cameraList[1].SetActive(true);
+                    break;
+                case 2:
+                    num--;
+                    break;
+                default:
+                    Debug.Log("Unknown Data");
+                    break;
+            }
         }
     }
 
@@ -88,6 +123,14 @@ public class EmailManager : MonoBehaviour
     {
         emailDisplay.SetActive(true);
         emailButton.gameObject.GetComponent<Button>().enabled = false;
+        cctvButton.gameObject.GetComponent<Button>().enabled = false;
+    }
+
+    public void GoToCCTV()
+    {
+        cctvDisplay.SetActive(true);
+        emailButton.gameObject.GetComponent<Button>().enabled = false;
+        cctvButton.gameObject.GetComponent<Button>().enabled = false;
     }
 
     public void GoToEmailPopup()
@@ -100,8 +143,10 @@ public class EmailManager : MonoBehaviour
     {
         emailPopupCanvas.SetActive(false);
         emailDisplay.SetActive(false);
+        cctvDisplay.SetActive(false);
         desktopDisplay.SetActive(true);
         emailButton.gameObject.GetComponent<Button>().enabled = true;
+        cctvButton.gameObject.GetComponent<Button>().enabled = true;
 
     }
     public void ExitButtonToEmailDisplay()
