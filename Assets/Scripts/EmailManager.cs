@@ -11,6 +11,10 @@ public class EmailManager : MonoBehaviour
     [SerializeField] private List<Button> emailNotificationsList = null;
     [SerializeField] private List<Text> senderNameTextList = null;
     [SerializeField] private List<Text> dateNameTextList = null;
+    [SerializeField] private GameObject unreadArea = null;
+    [SerializeField] private GameObject readArea = null;
+    [SerializeField] private GameObject unreadButton = null;
+    [SerializeField] private GameObject readButton = null;
 
     [Header("Email Popup Settings")]
     [SerializeField] private Text targetNameText = null;
@@ -164,10 +168,13 @@ public class EmailManager : MonoBehaviour
         emailDisplay.SetActive(false);
         cctvDisplay.SetActive(false);
         desktopDisplay.SetActive(true);
+        unreadArea.SetActive(true);
+        readArea.SetActive(false);
         emailButton.gameObject.GetComponent<Button>().enabled = true;
         cctvButton.gameObject.GetComponent<Button>().enabled = true;
         currentDisplay = 0;
-
+        unreadButton.gameObject.GetComponent<Image>().color = new Color32(255, 255, 0, 255);
+        readButton.gameObject.GetComponent<Image>().color = new Color32(255, 255, 255, 255);
     }
     public void ExitButtonToEmailDisplay()
     {
@@ -180,5 +187,21 @@ public class EmailManager : MonoBehaviour
     {
         inboxDisplay.SetActive(true);
         emailDisplay.SetActive(false);
+    }
+
+    public void SwitchToReadTab()
+    {
+        unreadArea.SetActive(false);
+        readArea.SetActive(true);
+        readButton.gameObject.GetComponent<Image>().color = new Color32(255, 255, 0, 255);
+        unreadButton.gameObject.GetComponent<Image>().color = new Color32(255, 255, 255, 255);
+    }
+
+    public void SwitchToUnreadTab()
+    {
+        unreadArea.SetActive(true);
+        readArea.SetActive(false);
+        unreadButton.gameObject.GetComponent<Image>().color = new Color32(255, 255, 0, 255);
+        readButton.gameObject.GetComponent<Image>().color = new Color32(255, 255, 255, 255);
     }
 }
