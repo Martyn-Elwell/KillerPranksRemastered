@@ -436,25 +436,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 862505426}
     m_Modifications:
-    - target: {fileID: 928999053950047482, guid: 718af46429c818c42b3f5ecadb708d9f,
-        type: 3}
-      propertyPath: m_Layer
-      value: 6
-      objectReference: {fileID: 0}
     - target: {fileID: 2820556945476392509, guid: 718af46429c818c42b3f5ecadb708d9f,
         type: 3}
       propertyPath: m_Name
       value: Floor One Finished
-      objectReference: {fileID: 0}
-    - target: {fileID: 3342134354214903516, guid: 718af46429c818c42b3f5ecadb708d9f,
-        type: 3}
-      propertyPath: m_Layer
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 4001666230530691516, guid: 718af46429c818c42b3f5ecadb708d9f,
-        type: 3}
-      propertyPath: m_Layer
-      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5968652518301195966, guid: 718af46429c818c42b3f5ecadb708d9f,
         type: 3}
@@ -505,41 +490,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7228937269972101273, guid: 718af46429c818c42b3f5ecadb708d9f,
-        type: 3}
-      propertyPath: m_Layer
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 7229642720792310669, guid: 718af46429c818c42b3f5ecadb708d9f,
-        type: 3}
-      propertyPath: m_Layer
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 7229644937071466581, guid: 718af46429c818c42b3f5ecadb708d9f,
-        type: 3}
-      propertyPath: m_Layer
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 7229795916376871455, guid: 718af46429c818c42b3f5ecadb708d9f,
-        type: 3}
-      propertyPath: m_Layer
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 7229893078974229519, guid: 718af46429c818c42b3f5ecadb708d9f,
-        type: 3}
-      propertyPath: m_Layer
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 7230333943879632903, guid: 718af46429c818c42b3f5ecadb708d9f,
-        type: 3}
-      propertyPath: m_Layer
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 7230514634174885035, guid: 718af46429c818c42b3f5ecadb708d9f,
-        type: 3}
-      propertyPath: m_Layer
-      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
