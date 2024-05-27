@@ -8,13 +8,14 @@ public class EmailManager : MonoBehaviour
     [SerializeField] private List<EmailScriptableObject> emailScriptableObject = null;
 
     [Header("Inbox Button Settings")]
-    [SerializeField] private List<Button> emailNotificationsList = null;
+    private List<Button> emailNotificationsList = null;
     [SerializeField] private List<Text> senderNameTextList = null;
     [SerializeField] private List<Text> dateNameTextList = null;
     [SerializeField] private GameObject unreadArea = null;
     [SerializeField] private GameObject readArea = null;
     [SerializeField] private GameObject unreadButton = null;
     [SerializeField] private GameObject readButton = null;
+    [SerializeField] private GameObject content = null;
 
     [Header("Email Popup Settings")]
     [SerializeField] private Text targetNameText = null;
@@ -34,17 +35,26 @@ public class EmailManager : MonoBehaviour
     [Header("Camera Lists")]
     [SerializeField] private List<GameObject> footageList = null;
 
+    [Header("Prefabs")]
+    [SerializeField] private GameObject emailButtonPrefab;
+
     private int currentDisplay = 0;
 
     // Start is called before the first frame update
     private void Start()
     {
         /// TEMP TEST WILL BE REMOVED ///
-        senderNameTextList[0].text = emailScriptableObject[0].sender;
-        senderNameTextList[1].text = emailScriptableObject[1].sender;
-        dateNameTextList[0].text = emailScriptableObject[0].date;
-        dateNameTextList[1].text = emailScriptableObject[1].date;
+        //senderNameTextList[0].text = emailScriptableObject[0].sender;
+        //senderNameTextList[1].text = emailScriptableObject[1].sender;
+        //dateNameTextList[0].text = emailScriptableObject[0].date;
+        //dateNameTextList[1].text = emailScriptableObject[1].date;
         ///
+
+        for (int i = 0; i < 2; i++)
+        {
+            Instantiate(emailButtonPrefab, content.transform.position, Quaternion.identity, content.transform);
+            emailNotificationsList.Add(emailButtonPrefab.GetComponent<Button>());
+        }
 
         // Used to click on each inbox message individually
         foreach (Button email in emailNotificationsList)
