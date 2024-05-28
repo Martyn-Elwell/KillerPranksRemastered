@@ -935,7 +935,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 183
+    m_Bits: 439
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -4032,6 +4032,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c549930e22640f94ea031d2d31f02aa0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Cutscene: {fileID: 0}
+  player: {fileID: 0}
   lookSpeed: 100
   walkSpeed: 5
   sprintSpeed: 7
@@ -4082,7 +4084,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1bdbd1eed8fa7be40a15af4c8c0a4126, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player_cam: {fileID: 0}
 --- !u!114 &1536216111066548928
 MonoBehaviour:
   m_ObjectHideFlags: 0
