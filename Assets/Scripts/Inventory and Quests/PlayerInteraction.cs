@@ -7,6 +7,7 @@ public class PlayerInteraction : MonoBehaviour
     private Inventory playerInventory;
     private UIHandler UI;
     private GameObject currentInteractable = null;
+    [SerializeField]private LayerMask layerMask;
 
     [SerializeField] private float raycastDistance = 3f;
 
@@ -27,8 +28,7 @@ public class PlayerInteraction : MonoBehaviour
         // Check for the raycast hit without pressing the key to show the interaction text
         Ray rayForText = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
         RaycastHit hitForUI;
-
-        if (Physics.Raycast(rayForText, out hitForUI, raycastDistance))
+        if (Physics.Raycast(rayForText, out hitForUI, raycastDistance, layerMask.value))
         {
             // Check if the hit object has a script with the ItemPickup component
             IPickupable pickupable = hitForUI.collider.GetComponent<IPickupable>();
@@ -75,7 +75,7 @@ public class PlayerInteraction : MonoBehaviour
         Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
         RaycastHit hit;
 
-        if (Physics.Raycast(ray, out hit, raycastDistance))
+        if (Physics.Raycast(ray, out hit, raycastDistance, layerMask.value))
         {
             // Pickup able object
             IPickupable pickupable = hit.collider.GetComponent<IPickupable>();

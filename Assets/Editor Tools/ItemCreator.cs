@@ -5,7 +5,7 @@ using System.IO;
 using UnityEngine.UIElements;
 using ObjectField = UnityEditor.UIElements.ObjectField;
 using ColorField = UnityEditor.UIElements.ColorField;
-using DG.Tweening.Plugins.Core.PathCore;
+using System;
 
 public class ItemCreator : EditorWindow
 {
@@ -19,11 +19,14 @@ public class ItemCreator : EditorWindow
     // Item Inputs
     private TextField nameField;
     private TextField descriptionField;
+    private Toggle toolField;
+    private Toggle stackField;
     private ObjectField prefabField;
     private ObjectField iconField;
     private Sprite iconSprite;
     private ColorField colourField;
     private Toggle contrabandField;
+    private Label errorField;
 
     [MenuItem("Editors/ItemCreator")]
     public static void ShowExample()
@@ -45,10 +48,15 @@ public class ItemCreator : EditorWindow
     {
         nameField = root.Q<TextField>("NameField");
         descriptionField = root.Q<TextField>("DescriptionField");
+        toolField = root.Q<Toggle>("ToolField");
+        toolField.RegisterValueChangedCallback(OnToolValueChanged);
+        stackField = root.Q<Toggle>("StackField");
+        stackField.style.display = DisplayStyle.None;
+        contrabandField = root.Q<Toggle>("ContrabandField");
         prefabField = root.Q<ObjectField>("PrefabField");
         iconField = root.Q<ObjectField>("IconField");
         colourField = root.Q<ColorField>("ColourField");
-        contrabandField = root.Q<Toggle>("ContrabandField");
+        errorField = root.Q<Label>("ErrorField");
 
         // Button Setup
         Button Button = rootVisualElement.Q<Button>("CreateField");
@@ -58,16 +66,34 @@ public class ItemCreator : EditorWindow
         }
     }
 
+
+
     private void OnButtonPressed()
     {
         // Check if the prefab is assigned
-        if (prefabField.value != null)
+        if (nameField.value != "" && descriptionField.value != "" && prefabField.value != null && iconField.value != null)
         {
             CreateNewItem();
         }
-        else
+        else if (nameField.value == "")
         {
-            Debug.LogError("No Prefab assigned! Input a GameObject prefab to generate icon.");
+            errorField.text = "Error: No Name entered! Input a String name to generate item.";
+            Debug.LogError("Error: No Name entered! Input a String name to generate item.");
+        }
+        else if (descriptionField.value == "")
+        {
+            errorField.text = "Error: No Desciption entered! Input a String description (capatalise each word) to generate item.";
+            Debug.LogError("Error: No Desciption entered! Input a String description (capatalise each word) to generate item.");
+        }
+        else if (prefabField.value == null)
+        {
+            errorField.text = "Error: No Prefab assigned! Input a GameObject prefab to generate item.";
+            Debug.LogError("Error: No Prefab assigned! Input a GameObject prefab to generate item.");
+        }
+        else if (iconField.value == null)
+        {
+            errorField.text = "Error: No Icon assigned! Input a Sprite Icon to generate item.";
+            Debug.LogError("Error: No Icon assigned! Input a Sprite Icon to generate item.");
         }
     }
 
@@ -82,6 +108,7 @@ public class ItemCreator : EditorWindow
 
         // Add Item Component and assign new scriptable object
         newItem.AddComponent<Item>();
+        newItem.layer = LayerMask.NameToLayer("Items");
         Item itemScript = newItem.GetComponent<Item>();
         itemScript.itemData = newData;
 
@@ -108,14 +135,18 @@ public class ItemCreator : EditorWindow
         ItemData newData = ScriptableObject.CreateInstance<ItemData>();
 
         // Set values
-        newData.name = nameField.value;
+        newData.name = nameField.value.ToLower();
         newData.ID = CalculateItemID();
         newData.itemName = nameField.value;
         newData.itemDescription = descriptionField.value;
+        newData.tool = toolField.value;
+        newData.doesStack = stackField.value;
+        newData.contraband = contrabandField.value;
         iconSprite = iconField.value as Sprite;
         if (iconSprite != null) { newData.Icon = iconSprite; }
-        newData.IconColour = colourField.value;
-        newData.contraband = contrabandField.value;
+        Color newColor = colourField.value; newColor.a = 1;
+        newData.IconColour = newColor;
+        
 
         // Define the path to save the ScriptableObject asset
         if (!Directory.Exists(filePath))
@@ -157,10 +188,25 @@ public class ItemCreator : EditorWindow
     {
         nameField.SetValueWithoutNotify(null);
         descriptionField.SetValueWithoutNotify(null);
+        toolField.SetValueWithoutNotify(false);
+        stackField.SetValueWithoutNotify(true);
+        contrabandField.SetValueWithoutNotify(false);
         prefabField.SetValueWithoutNotify(null);
         iconField.SetValueWithoutNotify(null);
         colourField.SetValueWithoutNotify(Color.white);
-        contrabandField.SetValueWithoutNotify(false);
+        errorField.text = string.Empty;
+    }
+
+    private void OnToolValueChanged(ChangeEvent<bool> evt)
+    {
+        if (toolField.value == true)
+        {
+            stackField.style.display = DisplayStyle.Flex;
+        }
+        else if (toolField.value == false)
+        {
+            stackField.style.display = DisplayStyle.None;
+        }
     }
 
 }

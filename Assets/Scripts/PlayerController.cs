@@ -6,8 +6,6 @@ public class PlayerController : MonoBehaviour
 {
     [Header("References")]
     private CharacterController characterController;
-    [SerializeField] public GameObject Cutscene;
-    [SerializeField] public GameObject player;
 
     [Header("Stats")]
     [SerializeField] private float lookSpeed = 100f;
@@ -38,9 +36,6 @@ public class PlayerController : MonoBehaviour
         characterController = GetComponent<CharacterController>();
         Camera _camera = GetComponentInChildren<Camera>();
         cameraTransform = _camera.gameObject.transform;
-        SpawnPlayer();
-        //Cutscene.SetActive(true);
-        //Cutscene.startTimeline();
     }
 
 
@@ -125,15 +120,5 @@ public class PlayerController : MonoBehaviour
         float currentHeight = isCrouching ? crouchHeight : standingHeight;
         characterController.height = currentHeight;
         cameraTransform.localPosition = new Vector3(cameraTransform.localPosition.x, currentHeight, cameraTransform.localPosition.z);
-    }
-
-    public void SpawnPlayer()
-    {
-        player.transform.position = new Vector3(-14.985f, 1.192093e-07f, 17.304f);
-        
-        player.transform.rotation = Quaternion.Euler(0f, 183.4f, 0f);
-
-       // Cutscene.GetComponent<CutsceneCamera>().startTimeline();
-
     }
 }

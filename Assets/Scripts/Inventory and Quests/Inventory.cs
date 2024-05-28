@@ -5,22 +5,64 @@ using static UnityEditor.Progress;
 
 public class Inventory : MonoBehaviour
 {
-    public List<ItemData> items = new List<ItemData>();
+    public List<ItemStack> items = new List<ItemStack>();
+    public List<ItemStack> tools = new List<ItemStack>();
 
 
     public void AddItem(ItemData item)
     {
-        // Adds Item from Inventory
-        ItemData existingItem = items.Find(i => i == item);
+        // Add to tool bar
+        if (item.tool == true)
+        {
+            if (item.doesStack)
+            {
+                ItemStack existingItem = tools.Find(i => i.item == item);
 
-        items.Add(item);
+                if (existingItem != null)
+                {
+                    existingItem.quantity += 1;
+                }
+                else
+                {
+                    ItemStack newitem = new ItemStack(item);
+                    tools.Add(newitem);
+                }
+            }
+            else
+            {
+                ItemStack existingItem = tools.Find(i => i.item == item);
+
+                if (existingItem == null)
+                {
+                    ItemStack newitem = new ItemStack(item);
+                    tools.Add(newitem);
+                }
+            }
+        }
+        // Add to Item Inventory
+        else
+        {
+            // Adds Item from Inventory
+            ItemStack existingItem = items.Find(i => i.item == item);
+
+            if (existingItem != null)
+            {
+                existingItem.quantity += 1;
+            }
+            else
+            {
+                ItemStack newitem = new ItemStack(item);
+                items.Add(newitem);
+            }
+        }
+        
     }
 
     public bool SearchInventory(ItemData item)
     {
-        foreach (ItemData itemInInv in items)
+        foreach (ItemStack itemInInv in items)
         {
-            if (itemInInv == item)
+            if (itemInInv.item == item)
             {
                 return true;
             }
