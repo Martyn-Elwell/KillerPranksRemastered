@@ -6,6 +6,7 @@ public class PlayerInteraction : MonoBehaviour
 {
     private Inventory playerInventory;
     private UIHandler UI;
+    private GameObject currentInteractable = null;
 
     [SerializeField] private float raycastDistance = 3f;
 
@@ -25,30 +26,47 @@ public class PlayerInteraction : MonoBehaviour
     {
         // Check for the raycast hit without pressing the key to show the interaction text
         Ray rayForText = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
-        RaycastHit hitForText;
+        RaycastHit hitForUI;
 
-        if (Physics.Raycast(rayForText, out hitForText, raycastDistance))
+        if (Physics.Raycast(rayForText, out hitForUI, raycastDistance))
         {
             // Check if the hit object has a script with the ItemPickup component
-            IPickupable pickupable = hitForText.collider.GetComponent<IPickupable>();
-            IInteractable interactable = hitForText.collider.GetComponent<IInteractable>();
+            IPickupable pickupable = hitForUI.collider.GetComponent<IPickupable>();
+            IInteractable interactable = hitForUI.collider.GetComponent<IInteractable>();
+
+            // Ray hit pick up item
             if (pickupable != null)
             {
-                UI.PickupText(true, hitForText.collider.GetComponent<Item>().itemData.Icon);
+                // Enable text
+                UI.PickupText(true, hitForUI.collider.GetComponent<Item>().itemData.Icon);
+
+                //Enable Outline and save game object
+                currentInteractable = hitForUI.collider.gameObject;
+                Outline(true);
 
             }
+            // Ray hit interactable
             else if (interactable != null)
             {
+                // Enable text
                 UI.InteractText(true);
+
+                //Enable Outline and save game object
+                currentInteractable = hitForUI.collider.gameObject;
+                Outline(true);
             }
+            // Ray hit non interactable
             else
             {
                 UI.HideInteractiveText();
+                Outline(false);
             }
         }
+        // Ray hit nothing
         else
         {
             UI.HideInteractiveText();
+            Outline(false);
         }
     }
 
@@ -85,5 +103,19 @@ public class PlayerInteraction : MonoBehaviour
     public void PickUpItem(ItemData item)
     {
         playerInventory.AddItem(item);
+    }
+
+    private void Outline(bool active)
+    {
+        if (active)
+        {
+            if (currentInteractable.GetComponent<IInteractable>() != null) { currentInteractable.GetComponent<IInteractable>().Outline(true); }
+            if (currentInteractable.GetComponent<IPickupable>() != null) { currentInteractable.GetComponent<IPickupable>().Outline(true); }
+        }
+        else
+        {
+            if (currentInteractable.GetComponent<IInteractable>() != null) { currentInteractable.GetComponent<IInteractable>().Outline(false); }
+            if (currentInteractable.GetComponent<IPickupable>() != null) { currentInteractable.GetComponent<IPickupable>().Outline(false); }
+        }
     }
 }
