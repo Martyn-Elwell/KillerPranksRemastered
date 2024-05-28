@@ -15,7 +15,9 @@ MonoBehaviour:
   ID: 0
   itemName: donut
   itemDescription: Donut
+  tool: 0
+  doesStack: 1
+  contraband: 0
   prefab: {fileID: 58134109241273076, guid: c06d8443f2afd9c4b9cc981e7c104b2b, type: 3}
   Icon: {fileID: 21300000, guid: 5f0ffcfa68d801e42831966b4f463146, type: 3}
   IconColour: {r: 0.9150943, g: 0.39423868, b: 0.74206555, a: 1}
-  contraband: 0

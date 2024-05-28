@@ -15,7 +15,9 @@ MonoBehaviour:
   ID: 1
   itemName: whoopee
   itemDescription: Whoopee
+  tool: 0
+  doesStack: 1
+  contraband: 0
   prefab: {fileID: 8130860196977701412, guid: 65e7c7eaa4061a54ea8e75da15ffdb34, type: 3}
   Icon: {fileID: 21300000, guid: 4239f0d262ce7c14dbd55838a94ec43f, type: 3}
   IconColour: {r: 0.7924528, g: 0.4385902, b: 0.72625375, a: 1}
-  contraband: 0
