@@ -107,6 +107,7 @@ public class PlayerInteraction : MonoBehaviour
 
     private void Outline(bool active)
     {
+        if (currentInteractable == null) { return; }
         if (active)
         {
             if (currentInteractable.GetComponent<IInteractable>() != null) { currentInteractable.GetComponent<IInteractable>().Outline(true); }
