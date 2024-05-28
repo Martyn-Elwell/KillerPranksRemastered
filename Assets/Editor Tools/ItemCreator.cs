@@ -29,18 +29,14 @@ public class ItemCreator : EditorWindow
     public static void ShowExample()
     {
         ItemCreator wnd = GetWindow<ItemCreator>();
-        wnd.titleContent = new GUIContent("ItemCreator");
+        wnd.titleContent = new GUIContent("Item Creator");
     }
 
     public void CreateGUI()
     {
         // Each editor window contains a root VisualElement object
         root = rootVisualElement;
-
-
-        // Instantiate UXML
-        VisualElement labelFromUXML = m_VisualTreeAsset.Instantiate();
-        root.Add(labelFromUXML);
+        m_VisualTreeAsset.CloneTree(root);
 
         SetupUI();
     }
