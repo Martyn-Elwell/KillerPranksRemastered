@@ -140,7 +140,8 @@ public class ItemCreator : EditorWindow
         newData.itemName = nameField.value;
         newData.itemDescription = descriptionField.value;
         newData.tool = toolField.value;
-        newData.doesStack = stackField.value;
+        if (toolField.value == true) { newData.doesStack = stackField.value; }
+        else if (toolField.value == false) { newData.doesStack = true; }
         newData.contraband = contrabandField.value;
         iconSprite = iconField.value as Sprite;
         if (iconSprite != null) { newData.Icon = iconSprite; }

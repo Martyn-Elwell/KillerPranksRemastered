@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -7,6 +8,7 @@ public class InputHandler : MonoBehaviour
 {
     private PlayerController playerController;
     private PlayerInteraction playerInteraction;
+    private Inventory inventory;
     private PlayerControls playerControls;
     //[SerializeField] private GameObject player_cam;
 
@@ -19,6 +21,7 @@ public class InputHandler : MonoBehaviour
     {
         playerController = GetComponent<PlayerController>();
         playerInteraction = GetComponent<PlayerInteraction>();
+        inventory = GetComponent<Inventory>();
         playerControls = new PlayerControls();
     }
 
@@ -35,6 +38,8 @@ public class InputHandler : MonoBehaviour
         playerControls.Player.Sprint.canceled += ctx => playerController.isSprinting = ctx.ReadValueAsButton();
         playerControls.Player.Crouch.performed += ctx => ToggleCrouch(ctx.ReadValueAsButton());
         playerControls.Player.Interact.performed += ctx => playerInteraction.Interact();
+        playerControls.Player.Scroll.performed += OnScroll;
+        playerControls.Player.Scroll.canceled += OnScroll;
     }
 
     void OnDisable()
@@ -49,6 +54,18 @@ public class InputHandler : MonoBehaviour
     void OnLook(InputAction.CallbackContext context)
     {
         playerController.lookInput = context.ReadValue<Vector2>();
+    }
+
+    void OnScroll(InputAction.CallbackContext context)
+    {
+        if (context.ReadValue<float>() > 0)
+        {
+            inventory.NextTool();
+        }
+        else if (context.ReadValue<float>() < 0)
+        {
+            inventory.PreviousTool();
+        }
     }
 
     void ToggleCrouch(bool isCrouchButtonPressed)
