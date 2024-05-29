@@ -6,9 +6,9 @@ using UnityEngine;
 [Serializable]
 public class ItemStack
 {
-    [HideInInspector]public string InspectorName;
+    public string InspectorName;
     public ItemData item;
-    public int quantity;
+    public int quantity = 1;
 
     public ItemStack(ItemData data)
     {

@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee48d83ac9e477e458a4dff4262dd73a, type: 3}
+  m_Name: smartphone
+  m_EditorClassIdentifier: 
+  ID: 5
+  itemName: smartphone
+  itemDescription: Smartphone
+  tool: 1
+  doesStack: 0
+  contraband: 0
+  prefab: {fileID: 671517787506822492, guid: 32c42003dfe9f2649a9527cf6cc78d83, type: 3}
+  Icon: {fileID: 21300000, guid: 9d5eccf39a220a945afe15a98402e823, type: 3}
+  IconColour: {r: 0.5471698, g: 0.5471698, b: 0.5471698, a: 1}

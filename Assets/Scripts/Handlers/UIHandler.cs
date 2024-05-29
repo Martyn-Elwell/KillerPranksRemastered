@@ -12,6 +12,7 @@ public class UIHandler : MonoBehaviour
 {
     [SerializeField] private GameObject ToolbarSlotPrefab;
     [SerializeField] private List<GameObject> Toolbar;
+    private List<Sprite> visibleSprites;
     private Vector3 originPos = new Vector3(1850, -50, 0);
     private float toolbarMoveDistance = 110f;
     private bool toolbarIsMoving = false;

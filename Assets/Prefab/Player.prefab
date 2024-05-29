@@ -4032,8 +4032,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c549930e22640f94ea031d2d31f02aa0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Cutscene: {fileID: 0}
-  player: {fileID: 0}
   lookSpeed: 100
   walkSpeed: 5
   sprintSpeed: 7
@@ -4075,6 +4073,36 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   items: []
+  tools:
+  - InspectorName: Smartphone
+    item: {fileID: 11400000, guid: 3561c814fd02af24681b20686beaac7c, type: 2}
+    quantity: 1
+  - InspectorName: Paper Plane
+    item: {fileID: 11400000, guid: 2cb9a65c2f1399b469404e76b7cd08c0, type: 2}
+    quantity: 5
+  - InspectorName: Screwdriver
+    item: {fileID: 11400000, guid: 773e2b44ec139144ebd5475670000ea5, type: 2}
+    quantity: 1
+  - InspectorName: Key
+    item: {fileID: 11400000, guid: 76dbfdf77f3898344ba1990fc748c228, type: 2}
+    quantity: 1
+  - InspectorName: Sleeping Pills
+    item: {fileID: 11400000, guid: c06db3020fb9f0e4f9604c2e93787bc7, type: 2}
+    quantity: 1
+  - InspectorName: Laxatives
+    item: {fileID: 11400000, guid: 1949ae5a611a36140b326018b74b41bc, type: 2}
+    quantity: 1
+  - InspectorName: 8 Ball
+    item: {fileID: 11400000, guid: eefb525dbd3f7d342aff23a7b168812d, type: 2}
+    quantity: 1
+  - InspectorName: Revolver
+    item: {fileID: 11400000, guid: 5fad9d4ad5af1594580d084e3e8895de, type: 2}
+    quantity: 1
+  selectedToolIndex: 0
+  SelectedTool:
+    InspectorName: 
+    item: {fileID: 0}
+    quantity: 0
 --- !u!114 &5086840087802869104
 MonoBehaviour:
   m_ObjectHideFlags: 0
