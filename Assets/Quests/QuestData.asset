@@ -14,3 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   questID: 0
   questDescription: 
+  itemRequirements: []
+  interactionRequirements: []
+  npcRequirements: []
+  requiredPriorQuest: {fileID: 0}
