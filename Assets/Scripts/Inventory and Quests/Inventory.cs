@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
+using UnityEditor.UIElements;
 using UnityEditorInternal.Profiling.Memory.Experimental;
 using UnityEngine;
 using static UnityEditor.Progress;
@@ -85,7 +87,8 @@ public class Inventory : MonoBehaviour
             selectedToolIndex = 0;
         }
         SelectedTool = tools[selectedToolIndex];
-        UI.ScrollUp();
+        int adjustedIndex = GetAdjustedIndex(selectedToolIndex + 2);
+        UI.ScrollUp(tools[adjustedIndex].item);
     }
 
     public void PreviousTool()
@@ -97,7 +100,8 @@ public class Inventory : MonoBehaviour
             selectedToolIndex = tools.Count - 1;
         }
         SelectedTool = tools[selectedToolIndex];
-        UI.ScrollDown();
+        int adjustedIndex = GetAdjustedIndex(selectedToolIndex - 2);
+        UI.ScrollDown(tools[adjustedIndex].item);
     }
 
 
@@ -112,5 +116,36 @@ public class Inventory : MonoBehaviour
             }
         }
         return false;
+    }
+
+    public List<ItemData> GetToolbarData()
+    {
+        List<ItemData> returnData = new List<ItemData>();
+
+        for (int i = 0; i < 5; i++)
+        {
+            int index = selectedToolIndex - 2 + i;
+            index = GetAdjustedIndex(index);
+            returnData.Add(tools[index].item);
+        }
+
+        return returnData;
+    }
+
+    public int GetAdjustedIndex(int index)
+    {
+        Debug.Log("Index: " + index);
+        int adjustedIndex = index;
+        if (index >= tools.Count)
+        {
+            adjustedIndex = index % tools.Count;
+        }
+        else if (index < 0)
+        {
+            adjustedIndex = tools.Count + index;
+        }
+
+        Debug.Log("Adjusted: " + adjustedIndex);
+        return adjustedIndex;
     }
 }

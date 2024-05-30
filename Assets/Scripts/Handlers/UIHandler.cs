@@ -10,6 +10,7 @@ using Text = TMPro.TextMeshProUGUI;
 
 public class UIHandler : MonoBehaviour
 {
+    private Inventory inventory;
     [SerializeField] private GameObject ToolbarSlotPrefab;
     [SerializeField] private List<GameObject> Toolbar;
     private List<Sprite> visibleSprites;
@@ -26,36 +27,26 @@ public class UIHandler : MonoBehaviour
 
     private void Start()
     {
+        inventory = GetComponentInParent<Inventory>();
         HideInteractiveText();
         CreateToolbar();
     }
     private void CreateToolbar()
     {
+        List<ItemData> data = inventory.GetToolbarData();
         for (int i = 0; i < 5; i++)
         {
             Vector3 pos = new Vector3(originPos.x, originPos.y + toolbarMoveDistance * i, 0);
             GameObject slot = Instantiate(ToolbarSlotPrefab, pos, Quaternion.identity, transform);
             slot.GetComponent<ToobarSlot>().AssignPostiion(i);
+            slot.GetComponent<ToobarSlot>().AssignData(data[i]);
             Toolbar.Add(slot);
             
             
         }
     }
-    private void Update()
-    {
 
-        //Testing remove later
-        if (Input.GetKeyDown(KeyCode.UpArrow))
-        {
-            ScrollUp();
-        }
-        if (Input.GetKeyDown(KeyCode.DownArrow))
-        {
-            ScrollDown();
-        }
-    }
-
-    public void ScrollUp()
+    public void ScrollUp(ItemData newData)
     {
         if (delayEnabled) { return; }
         if (toolbarIsMoving)
@@ -70,6 +61,7 @@ public class UIHandler : MonoBehaviour
         Vector3 pos = new Vector3(originPos.x, originPos.y + toolbarMoveDistance * -1, 0);
         GameObject newSlot = Instantiate(ToolbarSlotPrefab, pos, Quaternion.identity, transform);
         newSlot.GetComponent<ToobarSlot>().AssignPostiion(-1);
+        newSlot.GetComponent<ToobarSlot>().AssignData(newData);
         Toolbar.Insert(0, newSlot);
 
         foreach (GameObject slot in Toolbar)
@@ -87,7 +79,7 @@ public class UIHandler : MonoBehaviour
         Invoke("CancelDelay", scrollDelay);
 
     }
-    public void ScrollDown()
+    public void ScrollDown(ItemData newData)
     {
         if (delayEnabled) { return; }
         if (toolbarIsMoving)
@@ -102,6 +94,7 @@ public class UIHandler : MonoBehaviour
         Vector3 pos = new Vector3(originPos.x, originPos.y + toolbarMoveDistance * 5, 0);
         GameObject newSlot = Instantiate(ToolbarSlotPrefab, pos, Quaternion.identity, transform);
         newSlot.GetComponent<ToobarSlot>().AssignPostiion(5);
+        newSlot.GetComponent<ToobarSlot>().AssignData(newData);
         Toolbar.Add(newSlot);
 
         foreach (GameObject slot in Toolbar)
