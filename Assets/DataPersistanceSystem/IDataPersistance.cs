@@ -6,7 +6,7 @@ using UnityEngine;
 //To let a script save and load data, implement interface IDataPersistance after monobehaviour in a script that requires it.
 //Then add the methods defined in IDataPersistance.
 
-//eg: 
+//eg: (with deathcount as an example variable)
 
 /*private void LoadData(GameData data) 
 {

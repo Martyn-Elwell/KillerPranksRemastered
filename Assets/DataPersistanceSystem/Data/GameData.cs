@@ -7,15 +7,15 @@ using UnityEngine;
 
 public class GameData
 {
-    //List data that needs to be saved here
-    public int deathCount;
+    //List data that needs to be saved here, eg:
+    //public int deathCount;
 
     //constructor
     //values defined here will be the default values when there's no data to load
-
     public GameData()
     {
-        this.deathCount = 0;
+        //eg:
+        //this.deathCount = 0;
     }
 
 }
