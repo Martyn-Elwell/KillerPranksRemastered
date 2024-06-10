@@ -1768,76 +1768,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &1495284817
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1495284819}
-  - component: {fileID: 1495284818}
-  m_Layer: 0
-  m_Name: EmailManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1495284818
+--- !u!114 &1495284818 stripped
 MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 6103534767556985882, guid: 9ab1b4f083361074da7b822a8a7dd669,
+    type: 3}
+  m_PrefabInstance: {fileID: 6893466229650143454}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1495284817}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 06af665362ce5394db864e00c3ab0468, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  emailScriptableObject:
-  - {fileID: 11400000, guid: 73010ff4f26c88641984003cc4fdbb43, type: 2}
-  - {fileID: 11400000, guid: b682ed6cac82c504f914628e176a421e, type: 2}
-  emailNotificationsList:
-  - {fileID: 1239267233}
-  - {fileID: 243193448}
-  senderNameTextList:
-  - {fileID: 1571561207}
-  - {fileID: 1448853767}
-  dateNameTextList:
-  - {fileID: 894992873}
-  - {fileID: 481921534}
-  unreadArea: {fileID: 583771456}
-  readArea: {fileID: 1604572432}
-  targetNameText: {fileID: 1422246929}
-  floorNameText: {fileID: 390670954}
-  prankNameText: {fileID: 1534632934}
-  desktopDisplay: {fileID: 1720785638}
-  inboxDisplay: {fileID: 486306395}
-  emailDisplay: {fileID: 296177269}
-  cctvDisplay: {fileID: 819601050}
-  emailButton: {fileID: 159246909}
-  cctvButton: {fileID: 681337527}
-  footageList:
-  - {fileID: 1432626633}
-  - {fileID: 674226682}
---- !u!4 &1495284819
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1495284817}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1246.118, y: 663.99524, z: 7.0613556}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1497219495
 GameObject:
   m_ObjectHideFlags: 0
@@ -3413,6 +3355,186 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 08a2f1fda95d8de42ba936230a0610fe, type: 3}
+--- !u!1001 &6893466229650143454
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5590064846811856739, guid: 9ab1b4f083361074da7b822a8a7dd669,
+        type: 3}
+      propertyPath: m_Name
+      value: EmailManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 5919803351029492506, guid: 9ab1b4f083361074da7b822a8a7dd669,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1246.118
+      objectReference: {fileID: 0}
+    - target: {fileID: 5919803351029492506, guid: 9ab1b4f083361074da7b822a8a7dd669,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 663.99524
+      objectReference: {fileID: 0}
+    - target: {fileID: 5919803351029492506, guid: 9ab1b4f083361074da7b822a8a7dd669,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 7.0613556
+      objectReference: {fileID: 0}
+    - target: {fileID: 5919803351029492506, guid: 9ab1b4f083361074da7b822a8a7dd669,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5919803351029492506, guid: 9ab1b4f083361074da7b822a8a7dd669,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5919803351029492506, guid: 9ab1b4f083361074da7b822a8a7dd669,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5919803351029492506, guid: 9ab1b4f083361074da7b822a8a7dd669,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5919803351029492506, guid: 9ab1b4f083361074da7b822a8a7dd669,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5919803351029492506, guid: 9ab1b4f083361074da7b822a8a7dd669,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5919803351029492506, guid: 9ab1b4f083361074da7b822a8a7dd669,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6103534767556985882, guid: 9ab1b4f083361074da7b822a8a7dd669,
+        type: 3}
+      propertyPath: readArea
+      value: 
+      objectReference: {fileID: 1604572432}
+    - target: {fileID: 6103534767556985882, guid: 9ab1b4f083361074da7b822a8a7dd669,
+        type: 3}
+      propertyPath: cctvButton
+      value: 
+      objectReference: {fileID: 681337527}
+    - target: {fileID: 6103534767556985882, guid: 9ab1b4f083361074da7b822a8a7dd669,
+        type: 3}
+      propertyPath: unreadArea
+      value: 
+      objectReference: {fileID: 583771456}
+    - target: {fileID: 6103534767556985882, guid: 9ab1b4f083361074da7b822a8a7dd669,
+        type: 3}
+      propertyPath: cctvDisplay
+      value: 
+      objectReference: {fileID: 819601050}
+    - target: {fileID: 6103534767556985882, guid: 9ab1b4f083361074da7b822a8a7dd669,
+        type: 3}
+      propertyPath: emailButton
+      value: 
+      objectReference: {fileID: 159246909}
+    - target: {fileID: 6103534767556985882, guid: 9ab1b4f083361074da7b822a8a7dd669,
+        type: 3}
+      propertyPath: emailDisplay
+      value: 
+      objectReference: {fileID: 296177269}
+    - target: {fileID: 6103534767556985882, guid: 9ab1b4f083361074da7b822a8a7dd669,
+        type: 3}
+      propertyPath: inboxDisplay
+      value: 
+      objectReference: {fileID: 486306395}
+    - target: {fileID: 6103534767556985882, guid: 9ab1b4f083361074da7b822a8a7dd669,
+        type: 3}
+      propertyPath: floorNameText
+      value: 
+      objectReference: {fileID: 390670954}
+    - target: {fileID: 6103534767556985882, guid: 9ab1b4f083361074da7b822a8a7dd669,
+        type: 3}
+      propertyPath: prankNameText
+      value: 
+      objectReference: {fileID: 1534632934}
+    - target: {fileID: 6103534767556985882, guid: 9ab1b4f083361074da7b822a8a7dd669,
+        type: 3}
+      propertyPath: desktopDisplay
+      value: 
+      objectReference: {fileID: 1720785638}
+    - target: {fileID: 6103534767556985882, guid: 9ab1b4f083361074da7b822a8a7dd669,
+        type: 3}
+      propertyPath: targetNameText
+      value: 
+      objectReference: {fileID: 1422246929}
+    - target: {fileID: 6103534767556985882, guid: 9ab1b4f083361074da7b822a8a7dd669,
+        type: 3}
+      propertyPath: footageList.Array.data[0]
+      value: 
+      objectReference: {fileID: 1432626633}
+    - target: {fileID: 6103534767556985882, guid: 9ab1b4f083361074da7b822a8a7dd669,
+        type: 3}
+      propertyPath: footageList.Array.data[1]
+      value: 
+      objectReference: {fileID: 674226682}
+    - target: {fileID: 6103534767556985882, guid: 9ab1b4f083361074da7b822a8a7dd669,
+        type: 3}
+      propertyPath: dateNameTextList.Array.data[0]
+      value: 
+      objectReference: {fileID: 894992873}
+    - target: {fileID: 6103534767556985882, guid: 9ab1b4f083361074da7b822a8a7dd669,
+        type: 3}
+      propertyPath: dateNameTextList.Array.data[1]
+      value: 
+      objectReference: {fileID: 481921534}
+    - target: {fileID: 6103534767556985882, guid: 9ab1b4f083361074da7b822a8a7dd669,
+        type: 3}
+      propertyPath: emailScriptableObject.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6103534767556985882, guid: 9ab1b4f083361074da7b822a8a7dd669,
+        type: 3}
+      propertyPath: senderNameTextList.Array.data[0]
+      value: 
+      objectReference: {fileID: 1571561207}
+    - target: {fileID: 6103534767556985882, guid: 9ab1b4f083361074da7b822a8a7dd669,
+        type: 3}
+      propertyPath: senderNameTextList.Array.data[1]
+      value: 
+      objectReference: {fileID: 1448853767}
+    - target: {fileID: 6103534767556985882, guid: 9ab1b4f083361074da7b822a8a7dd669,
+        type: 3}
+      propertyPath: emailScriptableObject.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 73010ff4f26c88641984003cc4fdbb43,
+        type: 2}
+    - target: {fileID: 6103534767556985882, guid: 9ab1b4f083361074da7b822a8a7dd669,
+        type: 3}
+      propertyPath: emailScriptableObject.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: b682ed6cac82c504f914628e176a421e,
+        type: 2}
+    - target: {fileID: 6103534767556985882, guid: 9ab1b4f083361074da7b822a8a7dd669,
+        type: 3}
+      propertyPath: emailNotificationsList.Array.data[0]
+      value: 
+      objectReference: {fileID: 1239267233}
+    - target: {fileID: 6103534767556985882, guid: 9ab1b4f083361074da7b822a8a7dd669,
+        type: 3}
+      propertyPath: emailNotificationsList.Array.data[1]
+      value: 
+      objectReference: {fileID: 243193448}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 9ab1b4f083361074da7b822a8a7dd669, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -3421,7 +3543,7 @@ SceneRoots:
   - {fileID: 465892592}
   - {fileID: 2934288}
   - {fileID: 1616576309}
-  - {fileID: 1495284819}
+  - {fileID: 6893466229650143454}
   - {fileID: 1096893645}
   - {fileID: 2140931364}
   - {fileID: 1365001812}

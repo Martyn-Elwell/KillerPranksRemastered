@@ -1,0 +1,74 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5590064846811856739
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5919803351029492506}
+  - component: {fileID: 6103534767556985882}
+  m_Layer: 0
+  m_Name: EmailManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5919803351029492506
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5590064846811856739}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1246.118, y: 663.99524, z: 7.0613556}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6103534767556985882
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5590064846811856739}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06af665362ce5394db864e00c3ab0468, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  emailScriptableObject:
+  - {fileID: 11400000, guid: 73010ff4f26c88641984003cc4fdbb43, type: 2}
+  - {fileID: 11400000, guid: b682ed6cac82c504f914628e176a421e, type: 2}
+  emailNotificationsList:
+  - {fileID: 0}
+  - {fileID: 0}
+  senderNameTextList:
+  - {fileID: 0}
+  - {fileID: 0}
+  dateNameTextList:
+  - {fileID: 0}
+  - {fileID: 0}
+  unreadArea: {fileID: 0}
+  readArea: {fileID: 0}
+  unreadButton: {fileID: 0}
+  readButton: {fileID: 0}
+  targetNameText: {fileID: 0}
+  floorNameText: {fileID: 0}
+  prankNameText: {fileID: 0}
+  desktopDisplay: {fileID: 0}
+  inboxDisplay: {fileID: 0}
+  emailDisplay: {fileID: 0}
+  cctvDisplay: {fileID: 0}
+  emailButton: {fileID: 0}
+  cctvButton: {fileID: 0}
+  footageList:
+  - {fileID: 0}
+  - {fileID: 0}
