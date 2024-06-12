@@ -9,10 +9,21 @@ public class Interactable : MonoBehaviour, IInteractable
     public void Start()
     {
         originalLayer = gameObject.layer;
+        OnStart();
     }
-        public void Interact()
+    public virtual void OnStart()
     {
 
+    }
+
+    public virtual void Interact()
+    {
+
+    }
+
+    public virtual void Interact(GameObject player)
+    {
+        Interact();
     }
 
     public void Outline(bool  active)
